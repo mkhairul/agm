@@ -25,4 +25,4 @@ spec:
   databases:
   - name: agm
     engine: MYSQL
-    
+    production: true
