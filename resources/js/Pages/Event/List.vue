@@ -7,13 +7,13 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-6 gap-1">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-6 gap-1" v-if="show_events">
                 <div class="event-item border-b border-gray-200 p-5" v-for="item in data" :key="item.id">
                     <div>
                         <h3><a :href="route('user_poll', { id: item.external_id })">{{ item.name }}</a></h3>
                         <p v-for="(answer, index) in item.answers" :key="index">{{ answer }}: {{ item[answer] ? item[answer]:0 }}</p>
                         <a :href="route('user_poll', { id: item.external_id })" v-if="item.qr">
-                            <img :src="'data:image/png;base64,' + item.qrcode" />
+                            <img :src="item.qrcode" />
                         </a>
                         <div class="delete-btn" title="Delete">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,6 +66,7 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
+    import QRCode from 'qrcode'
 
     export default {
         components: {
@@ -75,12 +76,36 @@
         props: ['user', 'data'],
         data() {
             return {
-                events: []
+                events: [],
+                show_events: false
             }
         },
         mounted(){
             var self = this;
             console.log(this.data)
+
+            var total_processed = 0;
+            this.data.forEach( (obj, index) => {
+                if(obj.qr)
+                {
+                    QRCode.toDataURL(obj.poll_url)
+                    .then(url => {
+                        obj.qrcode = url;
+                        total_processed += 1;
+                        if(total_processed >= this.data.length){
+                            self.show_events = true;
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err)
+                    })
+                }else{
+                    total_processed += 1;
+                    if(total_processed >= this.data.length){
+                        self.show_events = true;
+                    }
+                }
+            })
         }
     }
 </script>

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 
 /*
@@ -49,11 +48,12 @@ Route::match(['post'], '/poll/submit', function (Request $request) {
 
 Route::get('/poll/{id}', function (Request $request, $id) {
 
-    $data = \App\Models\Event::select(['name', 'external_id', 'description', 'deadline', 'answers'])->where('external_id', $id)->first();
+    $data = \App\Models\Event::select(['name', 'external_id', 'description', 'deadline', 'answers', 'qr'])->where('external_id', $id)->first();
     $total = \App\Models\Poll::where('user_session', \Session::getId())->where('external_id', $id)->count();
-
+    $data->poll_url = route('user_poll', ['id' => $data->external_id]);
     if($data->qr){
-        $data->qrcode = base64_encode(QrCode::format('png')->size(800)->generate(route('user_poll', ['id' => $data->external_id])));
+        //$data->qrcode = base64_encode(QrCode::format('png')->size(800)->generate(route('user_poll', ['id' => $data->external_id])));
+        $data->qrcode = '';
     }
 
     return Inertia\Inertia::render('Event/UserPoll', ['data' => $data, 'voted' => ($total ? 1:0)]);
@@ -73,8 +73,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/events', function () {
         $data = \App\Models\Event::where('user_id', \Illuminate\Support\Facades\Auth::id())->get();
         foreach($data as $row){
+            $row->poll_url = route('user_poll', ['id' => $row->external_id]);
             if($row->qr){
-                $row->qrcode = base64_encode(QrCode::format('png')->size(800)->generate(route('user_poll', ['id' => $row->external_id])));
+                //$row->qrcode = base64_encode(QrCode::format('png')->size(800)->generate(route('user_poll', ['id' => $row->external_id])));
+                $row->qrcode = '';
             }
             foreach($row->answers as $answer){
                 $row[$answer] = \App\Models\Poll::where('external_id', $row->external_id)->where('answer', $answer)->count();

@@ -20,7 +20,6 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "phpseclib/bcmath_compat": "1.0.4",
-        "simplesoftwareio/simple-qrcode": "~4",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {

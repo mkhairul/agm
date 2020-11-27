@@ -28,7 +28,7 @@
                         <jet-form-section @submitted="submitPoll" class="poll-content" rounded="0" single="true" v-if="voted === 0">
                             <template #form>
                                 <div class="grid" v-bind:class="{ 'md:grid-cols-2': data.qr }">
-                                    <div class="poll-qr" v-if="data.qr"><img :src="'data:image/png;base64,' + data.qrcode" /></div>
+                                    <div class="poll-qr" v-if="data.qr"><img :src="data.qrcode" /></div>
                                     <div class="p-6 bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-1">
                                         <div class="p-6 my-0 mx-auto xl:w-6/12">
                                             <div>Choose one:</div>
@@ -84,6 +84,7 @@
     import JetCheckbox from '@/Jetstream/Checkbox'
     import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import QRCode from 'qrcode'
 
     export default {
         components: {
@@ -121,7 +122,15 @@
             }
         },
         mounted(){
-            
+            var self = this;
+            console.log(self.data)
+            QRCode.toDataURL(self.data.poll_url)
+            .then(url => {
+                self.data.qrcode = url;
+            })
+            .catch(err => {
+                console.error(err)
+            })
         },
         methods: {
             submitPoll() {
