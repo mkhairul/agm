@@ -5,7 +5,7 @@ spec:
     git:
       branch: main
       repo_clone_url: https://github.com/mkhairul/agm.git
-    run_command: "heroku-php-nginx -C nginx.conf public/ && npm run production"
+    run_command: "heroku-php-nginx -C nginx.conf public/"
     envs:
     - key: APP_KEY
       value: "base64:CgaB/jTi6LsYA61ayMFUNU6w+y0g2NKv/WdwsnNB+pE="
