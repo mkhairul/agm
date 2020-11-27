@@ -1,0 +1,28 @@
+spec:
+  name: agm
+  services:
+  - environment_slug: php
+    git:
+      branch: main
+      repo_clone_url: https://github.com/mkhairul/agm.git
+    run_command: "heroku-php-nginx -C nginx.conf public/"
+    envs:
+    - key: APP_KEY
+      value: "base64:CgaB/jTi6LsYA61ayMFUNU6w+y0g2NKv/WdwsnNB+pE="
+    - key: DB_CONNECTION
+      value: mysql
+    - key: DB_HOST
+      value: ${agm.DATABASE_URL}
+    - key: DB_PORT
+      value: ${agm.PORT}
+    - key: DB_DATABASE
+      value: ${agm.DATABASE}
+    - key: DB_USERNAME
+      value: ${agm.USERNAME}
+    - key: DB_PASSWORD
+      value: ${agm.PASSWORD}
+    name: agm
+  databases:
+  - name: agm
+    engine: MYSQL
+    
