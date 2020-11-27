@@ -9,6 +9,8 @@ spec:
     envs:
     - key: APP_KEY
       value: "base64:CgaB/jTi6LsYA61ayMFUNU6w+y0g2NKv/WdwsnNB+pE="
+    - key: APP_ENV
+      value: production
     - key: DB_CONNECTION
       value: mysql
       scope: RUN_TIME
