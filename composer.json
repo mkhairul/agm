@@ -9,11 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "phpseclib/bcmath_compat": "1.0.4",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "hashids/hashids": "^4.0",
+        "hashids/hashids": "4.1.1",
         "inertiajs/inertia-laravel": "^0.2.4",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^1.6",
@@ -29,6 +28,20 @@
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "hashids/hashids",
+                "version": "4.1.1",
+                "source": {
+                    "url": "https://github.com/mkhairul/hashids.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
