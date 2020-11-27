@@ -12,17 +12,17 @@ spec:
     - key: DB_CONNECTION
       value: mysql
     - key: DB_HOST
-      value: ${agm.DATABASE_URL}
+      value: ${agmdb.DATABASE_URL}
     - key: DB_PORT
-      value: ${agm.PORT}
+      value: ${agmdb.PORT}
     - key: DB_DATABASE
-      value: ${agm.DATABASE}
+      value: ${agmdb.DATABASE}
     - key: DB_USERNAME
-      value: ${agm.USERNAME}
+      value: ${agmdb.USERNAME}
     - key: DB_PASSWORD
-      value: ${agm.PASSWORD}
+      value: ${agmdb.PASSWORD}
     name: agm
   databases:
-  - name: agm
+  - name: agmdb
     engine: MYSQL
     production: true
