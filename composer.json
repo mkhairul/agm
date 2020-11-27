@@ -12,12 +12,13 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "hashids/hashids": "4.1.1",
+        "hashids/hashids": "4.1.2",
         "inertiajs/inertia-laravel": "^0.2.4",
         "laravel/framework": "^8.12",
         "laravel/jetstream": "^1.6",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "phpseclib/bcmath_compat": "^1.0",
         "simplesoftwareio/simple-qrcode": "~4",
         "tightenco/ziggy": "^0.9.4"
     },
@@ -33,7 +34,7 @@
             "type": "package",
             "package": {
                 "name": "hashids/hashids",
-                "version": "4.1.1",
+                "version": "4.1.2",
                 "source": {
                     "url": "https://github.com/mkhairul/hashids.git",
                     "type": "git",
