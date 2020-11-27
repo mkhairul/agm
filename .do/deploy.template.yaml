@@ -11,16 +11,22 @@ spec:
       value: "base64:CgaB/jTi6LsYA61ayMFUNU6w+y0g2NKv/WdwsnNB+pE="
     - key: DB_CONNECTION
       value: mysql
+      scope: RUN_TIME
     - key: DB_HOST
       value: ${agmdb.DATABASE_URL}
+      scope: RUN_TIME
     - key: DB_PORT
       value: ${agmdb.PORT}
+      scope: RUN_TIME
     - key: DB_DATABASE
       value: ${agmdb.DATABASE}
+      scope: RUN_TIME
     - key: DB_USERNAME
       value: ${agmdb.USERNAME}
+      scope: RUN_TIME
     - key: DB_PASSWORD
       value: ${agmdb.PASSWORD}
+      scope: RUN_TIME
     name: agm
   databases:
   - name: agmdb
